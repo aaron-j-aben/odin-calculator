@@ -25,3 +25,7 @@ function divide(dividend, divisor) {
 
     return dividend / divisor;
 }
+
+function negate(x) {
+    return (-x);
+}
