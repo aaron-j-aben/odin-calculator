@@ -13,6 +13,10 @@ function startCalc() {
     let canEval = true;
 }
 
+/* Display behavior */
+
+/* Button behavior */
+
 /**
  * 
  * @param {number} op1 
