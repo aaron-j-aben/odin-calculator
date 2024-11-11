@@ -5,6 +5,24 @@
  * Arithmetic calculator with GUI
  */
 
+startCalc();
+
+function startCalc() {
+    let operand1 = 0, operand2 = null;
+    let canEval = true;
+}
+
+/**
+ * 
+ * @param {number} op1 
+ * @param {number} op2 
+ * @param {object} operation
+ * @returns {number} 
+ */
+function operate(op1, op2, operation) {
+    return operation(op1, op2);
+}
+
 /* Basic Operations with any number type */
 function add(x, y) {
     return x + y;
@@ -26,6 +44,6 @@ function divide(dividend, divisor) {
     return dividend / divisor;
 }
 
-function negate(x) {
+function negate(x, y) {
     return (-x);
 }
