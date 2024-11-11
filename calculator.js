@@ -4,13 +4,13 @@
  * 
  * Arithmetic calculator with GUI
  */
-
+let operand1, operand2, operation, canEval;
 startCalc();
 
 function startCalc() {
-    let operand1 = 0, operand2 = null;
-    let operation = null;
-    let canEval = true;
+    operand1 = 0, operand2 = null;
+    operation = null;
+    canEval = true;
 }
 
 /* Display behavior */
