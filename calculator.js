@@ -19,17 +19,6 @@ function startCalc() {
 /* Display behavior */
 
 /* Button behavior */
-btnGrid.addEventListener('mousedown', (e) => {
-    if (e.target.nodeName == 'BUTTON') {
-        e.target.classList.toggle('clicked');
-    }
-});
-
-btnGrid.addEventListener('mouseup', (e) => {
-    if (e.target.nodeName == 'BUTTON') {
-        e.target.classList.toggle('clicked');
-    }
-});
 
 /**
  * 

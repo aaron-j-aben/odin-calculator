@@ -56,11 +56,11 @@ html {
     transition: 0.1s ease-in-out;
 }
 
-#btn-grid button.clicked {
+#btn-grid button:active {
     box-shadow: black -0.5px 0.5px;
 }
 
-#btn-grid button.clicked.row1 {
+#btn-grid button.row1:active {
     background-color: red;
 }
 
