@@ -49,6 +49,7 @@ btnGrid.addEventListener('mousedown', (e) => {
         } else if (operation !== null) {
             operation = null;
         } else {
+            shadowOperation = null;
             operand1 = 0;
         }
     }
