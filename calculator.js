@@ -35,7 +35,7 @@ btnGrid.addEventListener('click', (e) => {
 });
 
 // AC/Clear Button Behavior
-btnGrid.addEventListener('click', (e) => {
+btnGrid.addEventListener('mousedown', (e) => {
     if (e.target.getAttribute('id') == 'clear') {
         if (operand2 !== null) {
             operand2 = null;
