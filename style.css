@@ -18,7 +18,7 @@ html {
     border-radius: 0 0 20px 20px;
     padding: 40px 20px;
     grid-template-columns: 10px 440px 10px;
-    grid-template-rows: [display-row] 80px [top-buffer] 15px [top-row] 300px;
+    grid-template-rows: [display-row] 80px 60px [top-buffer] 15px [top-row] 300px;
 }
 
 #display-container {
