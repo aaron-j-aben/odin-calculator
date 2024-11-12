@@ -34,9 +34,15 @@ html {
     grid-row-end: 2;
 }
 
+@font-face {
+    font-family: 'DSEG7-bold';
+    font-style: normal;
+    src: url("./DSEG7Classic-Bold.woff2") format('woff2');
+}
+
 #results-text {
     color: aliceblue;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'DSEG7-bold', sans-serif;
     font-size: 50px;
 }
 
@@ -55,6 +61,8 @@ html {
     grid-template-rows: repeat(5, 20fr);
     gap: 2%;
 }
+
+/* Button styles */
 
 #btn-grid button {
     justify-self: stretch;
@@ -77,6 +85,8 @@ button .btn-text {
 button:active .btn-text {
     top: 1px;
 }
+
+/* Row-specific styling */
 
 .row1 {
     color: azure;
