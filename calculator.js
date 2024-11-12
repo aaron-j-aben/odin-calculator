@@ -4,6 +4,7 @@
  * 
  * Arithmetic calculator with GUI
  */
+const MAX_NUM = 99999999;
 
 const btnGrid = document.querySelector('#btn-grid');
 
