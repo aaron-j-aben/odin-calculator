@@ -26,8 +26,9 @@ html {
     justify-content: end;
     align-items: end;
     padding: 2%;
+    border: 1px solid black;
 
-    background-color: black;
+    background-color: #a5b07e;
     grid-column-start: 2;
     grid-column-end: 3;
     grid-row-start: 1;
