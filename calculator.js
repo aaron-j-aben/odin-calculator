@@ -53,7 +53,7 @@ btnGrid.addEventListener('click', (e) => {
     if (e.target.classList.contains('num')) {
         let [numInput, firstOp] = (operation !== null) ? [operand2, false] : [operand1, true];
 
-        const numOfDigits = (numInput + '').replace(/[-.]/, '').length;
+        const numOfDigits = (numInput !== null) ? (numInput + '').replace(/[-.]/, '').length : 0;
         if (numOfDigits < 8) {
             numInput = (numInput * 10) + Number(e.target.value);
             
