@@ -59,6 +59,14 @@ html {
     box-shadow: black -0.75px 0.75px 0.5px inset;
 }
 
+button .btn-text {
+    position: relative;
+}
+
+button:active .btn-text {
+    top: 1px;
+}
+
 /* #btn-grid button.row1:active, #btn-grid button.col4:active {
     transition: 0s;
     background-color: red;
