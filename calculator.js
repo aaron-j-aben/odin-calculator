@@ -10,13 +10,16 @@ const btnGrid = document.querySelector('#btn-grid');
 const clearBtn = document.querySelector('#clear');
 const evalBtn = document.querySelector('#equals');
 
-let operand1, operand2, operation, shadowOperation;
 const operationMapping = {
     'plus': add,
     'minus': subtract,
     'times': multiply,
-    'divide': divide
+    'divide': divide,
+    'negate': negate,
+    'percent': percent
 };
+
+let operand1, operand2, operation, shadowOperation;
 
 startCalc();
 
@@ -46,6 +49,18 @@ evalBtn.addEventListener('click', (e) => {
             operand1 = shadowOperation(nop1).toString();
         }
         console.log(operand1); //temp display behavior
+    }
+});
+
+// Unary Operator Behavior
+btnGrid.addEventListener('mousedown', (e) => {
+    if (e.target.classList.contains('unary')) {
+        const unOp = operationMapping[e.target.getAttribute('id')];
+        if (operand2 !== null) {
+            operand2 = unOp(Number(operand2)).toString();
+        } else if (operand1 != 0) {
+            operand1 = unOp(Number(operand1)).toString();
+        }
     }
 });
 
@@ -127,10 +142,10 @@ function divide(dividend, divisor) {
 }
 
 // Unary operations
-function negate(x, y) {
-    return (y == null) ? (-x) : (-y);
+function negate(x) {
+    return -x;
 }
 
-function percent(x, y) {
+function percent(x) {
     return (x / 100);
 }
