@@ -54,12 +54,12 @@ btnGrid.addEventListener('click', (e) => {
 
         const numOfDigits = (numInput !== null) ? (numInput + '').replace(/[-.]/, '').length : 0;
         if (numOfDigits < 8) {
-            numInput = (numInput * 10) + Number(e.target.value);
+            numInput = (numInput + '') + e.target.value;
             
             if (firstOp) {
-                operand1 = numInput;
+                operand1 = Number(numInput);
             } else {
-                operand2 = numInput;
+                operand2 = Number(numInput);
             }
         }
     }
