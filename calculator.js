@@ -21,6 +21,7 @@ function startCalc() {
 /* Button behavior */
 
 // = button evaluation behavior
+// REMINDER TO DELETE - Evaluation results go to first number, op2 and operator not cleared until C pressed
 btnGrid.addEventListener('click', (e) => {
     if (e.target.getAttribute('id') == 'equals') {
         // Op2 and Oper must both be or neither be null to eval
@@ -30,6 +31,19 @@ btnGrid.addEventListener('click', (e) => {
             } else if (operand2 == null && operation == null){
                 console.log(operand1); //temp display behavior
             }
+        }
+    }
+});
+
+// AC/Clear Button Behavior
+btnGrid.addEventListener('click', (e) => {
+    if (e.target.getAttribute('clear')) {
+        if (operand2 !== null) {
+            operand2 = null;
+        } else if (operation != null) {
+            operation = null;
+        } else {
+            operand1 = 0;
         }
     }
 });
