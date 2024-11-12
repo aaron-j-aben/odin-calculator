@@ -4,7 +4,7 @@
  * 
  * Arithmetic calculator with GUI
  */
-const MAX_NUM = 99999999;
+const MAX_DIGITS = 8;
 
 const btnGrid = document.querySelector('#btn-grid');
 
@@ -29,6 +29,24 @@ btnGrid.addEventListener('click', (e) => {
                 console.log(operate(operand1, operand2, operation)); //temp display behavior
             } else if (operand2 == null && operation == null){
                 console.log(operand1); //temp display behavior
+            }
+        }
+    }
+});
+
+// num button behavior
+btnGrid.addEventListener('click', (e) => {
+    if (e.target.classList.contains('num')) {
+        let [numInput, firstOp] = (operation !== null) ? [operand2, false] : [operand1, true];
+
+        const numOfDigits = (numInput + '').replace(/[-.]/, '').length;
+        if (numOfDigits < 8) {
+            numInput = (numInput * 10) + Number(e.target.value);
+            
+            if (firstOp) {
+                operand1 = numInput;
+            } else {
+                operand2 = numInput;
             }
         }
     }
