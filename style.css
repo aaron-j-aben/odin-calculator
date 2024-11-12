@@ -12,6 +12,7 @@ html {
 #calculator {
     flex: 0 0 auto;
     background-color: #d1490e;
+    box-shadow: #752908 -4px 1px;
     display: grid;
     padding: 10px;
     border-radius: 0 0 20px 20px;
@@ -51,7 +52,7 @@ html {
     margin: 1%;
     border-radius: 10px;
     border: 1px;
-    box-shadow: black -3px 3px;
+    box-shadow: black -2px 2px;
     transition: 0.1s ease-in-out;
 }
 
