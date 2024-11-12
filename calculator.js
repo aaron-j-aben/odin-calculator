@@ -90,7 +90,7 @@ btnGrid.addEventListener('click', (e) => {
 
         const numOfDigits = (numInput !== null) ? numInput.replace(/[-.]/, '').length : 0;
         if (numOfDigits < 8) {
-            numInput = (numInput == '0') ? e.target.value : numInput + e.target.value; 
+            numInput = (numInput == '0' || numInput == null) ? e.target.value : numInput + e.target.value; 
 
             console.log(numInput);
             
