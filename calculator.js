@@ -9,6 +9,7 @@ const MAX_DIGITS = 8;
 const btnGrid = document.querySelector('#btn-grid');
 const clearBtn = document.querySelector('#clear');
 const evalBtn = document.querySelector('#equals');
+const disp = document.querySelector('#results-text');
 
 const operationMapping = {
     'plus': add,
@@ -28,7 +29,11 @@ function startCalc() {
     operation = null, shadowOperation = null;
 }
 
-/* Display behavior */
+/* DISPLAY BEHAVIOR */
+function updateDisplay(numStr) {
+    const maxPlaces = (Number.isInteger(numStr)) ? MAX_DIGITS : MAX_DIGITS + 1 ;
+    disp.textContent = numStr.slice(0, maxPlaces);
+}
 
 /* BUTTON BEHAVIOR */
 
@@ -42,8 +47,10 @@ btnGrid.addEventListener('mousedown', (e) => {
         const unOp = operationMapping[e.target.getAttribute('id')];
         if (operand2 !== null) {
             operand2 = unOp(Number(operand2)).toString();
+            updateDisplay(operand2);
         } else if (operand1 != 0) {
             operand1 = unOp(Number(operand1)).toString();
+            updateDisplay(operand1);
         }
     }
 });
@@ -68,6 +75,7 @@ clearBtn.addEventListener('mousedown', (e) => {
         shadowOperation = null;
         operand1 = '0';
     }
+    updateDisplay(operand1);
 });
 
 // num button behavior
@@ -83,8 +91,10 @@ btnGrid.addEventListener('click', (e) => {
             
             if (firstOp) {
                 operand1 = numInput;
+                updateDisplay(operand1);
             } else {
                 operand2 = numInput;
+                updateDisplay(operand2);
             }
         }
     }
@@ -95,8 +105,10 @@ btnGrid.addEventListener('click', (e) => {
     if (e.target.getAttribute('id') == 'dot') {
         if (operand2 !== null && !operand2.includes('.')){
             operand2 += '.';
+            updateDisplay(operand2);
         } else if (!operand1.includes('.')) {
             operand1 += '.';
+            updateDisplay(operand1);
         }
     }
 });
@@ -120,6 +132,7 @@ function evalEventHandler(e) {
         }
         console.log(operand1); //temp display behavior
     }
+    updateDisplay(operand1);
 }
 
 function operate(op1, op2, operation) {
