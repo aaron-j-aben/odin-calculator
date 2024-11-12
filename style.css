@@ -56,6 +56,10 @@ html {
     transition: 0.1s ease-in-out;
 }
 
+#btn-grid button.clicked {
+    box-shadow: black -0.5px 0.5px;
+}
+
 .row1 {
     background-color: red;
     grid-row-start: 1;
