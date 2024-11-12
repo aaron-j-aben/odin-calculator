@@ -7,21 +7,34 @@
 
 const btnGrid = document.querySelector('#btn-grid');
 
-let operand1, operand2, operation, canEval;
+let operand1, operand2, operation;
 startCalc();
 
 function startCalc() {
     operand1 = 0, operand2 = null;
     operation = null;
-    canEval = true;
 }
 
 /* Display behavior */
 
 /* Button behavior */
+
+// = button evaluation behavior
+btnGrid.addEventListener('click', (e) => {
+    if (e.target.getAttribute('id') == 'equals') {
+        // Op2 and Oper must both be or neither be null to eval
+        if (operand1 !== null) {
+            if (operand2 !== null & operation !== null){
+                console.log(operate(operand1, operand2, operation)); //temp display behavior
+            } else if (operand2 == null && operation == null){
+                console.log(operand1); //temp display behavior
+            }
+        }
+    }
+});
+
 btnGrid.addEventListener('click', (e) => {
     if (e.target.firstChild.nodeName == 'SPAN') {
-        console.log('in button');
     }
 });
 
