@@ -26,7 +26,9 @@ html {
     justify-content: end;
     align-items: end;
     padding: 2%;
-    border: 1px solid black;
+    box-shadow: 
+        rgb(50 50 70 / 90%) -4px 4px 3px inset,
+        rgb(50 50 70 / 90%) 2px -2px 3px inset;
 
     background-color: #a5b07e;
     grid-column-start: 2;
