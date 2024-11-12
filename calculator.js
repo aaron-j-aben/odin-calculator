@@ -40,6 +40,9 @@ evalBtn.addEventListener('click', (e) => {
     if (operand2 !== null & operation !== null){
         let top = nop2, toper = operation;
         operand1 = operate(nop1, nop2, operation).toString();
+        operand2 = null;
+        operation = null;
+
         shadowOperation = (x) => { // "Save" prior operation for repeat evaluations
             return toper(x, top);
         };
