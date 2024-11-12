@@ -19,6 +19,11 @@ function startCalc() {
 /* Display behavior */
 
 /* Button behavior */
+btnGrid.addEventListener('click', (e) => {
+    if (e.target.firstChild.nodeName == 'SPAN') {
+        console.log('in button');
+    }
+});
 
 /**
  * 
