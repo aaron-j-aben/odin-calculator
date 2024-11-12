@@ -60,7 +60,7 @@ html {
     box-shadow: black -0.5px 0.5px;
 }
 
-#btn-grid button.row1:active {
+#btn-grid button.row1:active, #btn-grid button.col4:active {
     background-color: red;
 }
 
@@ -91,6 +91,10 @@ html {
     grid-row-end: 6;
 }
 
+#zero {
+    grid-column-end: 3;
+}
+
 .col1 {
     grid-column-start: 1;
     grid-column-end: 2;
@@ -107,6 +111,8 @@ html {
 }
 
 .col4 {
+    color: azure;
+    background-color: darkred;
     grid-column-start: 5;
     grid-column-end: 6;
 }
