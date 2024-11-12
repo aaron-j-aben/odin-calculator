@@ -8,11 +8,11 @@ const MAX_DIGITS = 8;
 
 const btnGrid = document.querySelector('#btn-grid');
 
-let operand1, operand2, decimalModifier, operation, shadowOperation;
+let operand1, operand2, operation, shadowOperation;
 startCalc();
 
 function startCalc() {
-    operand1 = 0, operand2 = null, decimalModifier = 1;
+    operand1 = '0', operand2 = null;
     operation = null, shadowOperation = null;
 }
 
@@ -24,17 +24,18 @@ function startCalc() {
 // REMINDER TO DELETE - Evaluation results go to first number, op2 and operator not cleared until C pressed
 btnGrid.addEventListener('click', (e) => {
     if (e.target.getAttribute('id') == 'equals') {
+        const nop1 = Number(operand1), nop2 = Number(operand2);
         // Op2 and Oper must both be or neither be null to eval
         if (operand2 !== null & operation !== null){
-            let top = operand2, toper = operation;
-            operand1 = operate(operand1, operand2, operation);
+            let top = nop2, toper = operation;
+            operand1 = operate(nop1, nop2, operation).toString();
             shadowOperation = (x) => { // "Save" prior operation for repeat evaluations
                 return toper(x, top);
             };
             console.log(operand1); //temp display behavior
         } else if (operand2 == null && operation == null){
             if (shadowOperation !== null) {
-                operand1 = shadowOperation(operand1);
+                operand1 = shadowOperation(nop1).toString();
             }
             console.log(operand1); //temp display behavior
         }
@@ -44,15 +45,13 @@ btnGrid.addEventListener('click', (e) => {
 // AC/Clear Button Behavior
 btnGrid.addEventListener('mousedown', (e) => {
     if (e.target.getAttribute('id') == 'clear') {
-        decimalModifier = 1;
-
         if (operand2 !== null) {
             operand2 = null;
         } else if (operation !== null) {
             operation = null;
         } else {
             shadowOperation = null;
-            operand1 = 0;
+            operand1 = '0';
         }
     }
 });
@@ -62,14 +61,9 @@ btnGrid.addEventListener('click', (e) => {
     if (e.target.classList.contains('num')) {
         let [numInput, firstOp] = (operation !== null) ? [operand2, false] : [operand1, true];
 
-        const numOfDigits = (numInput !== null) ? (numInput + '').replace(/[-.]/, '').length : 0;
+        const numOfDigits = (numInput !== null) ? numInput.replace(/[-.]/, '').length : 0;
         if (numOfDigits < 8) {
-            if (decimalModifier < 1) {
-                numInput = numInput + (Number(e.target.value) * decimalModifier);
-                decimalModifier /= 10;
-            } else {
-                numInput = numInput * 10 + Number(e.target.value);
-            }
+            numInput = (numInput == '0') ? e.target.value : numInput + e.target.value; 
 
             console.log(numInput);
             
@@ -85,8 +79,10 @@ btnGrid.addEventListener('click', (e) => {
 // dot/decimal point button behavior
 btnGrid.addEventListener('click', (e) => {
     if (e.target.getAttribute('id') == 'dot') {
-        if (Number.isInteger(operand2) || Number.isInteger(operand1)) {
-            decimalModifier = 0.1;
+        if (operand2 !== null && !operand2.includes('.')){
+            operand2 += '.';
+        } else if (!operand1.includes('.')) {
+            operand1 += '.';
         }
     }
 });
