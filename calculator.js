@@ -8,11 +8,11 @@ const MAX_DIGITS = 8;
 
 const btnGrid = document.querySelector('#btn-grid');
 
-let operand1, operand2, operation, shadowOperation;
+let operand1, operand2, decimalModifier, operation, shadowOperation;
 startCalc();
 
 function startCalc() {
-    operand1 = 0, operand2 = null;
+    operand1 = 0, operand2 = null, decimalModifier = 1;
     operation = null, shadowOperation = null;
 }
 
@@ -44,6 +44,8 @@ btnGrid.addEventListener('click', (e) => {
 // AC/Clear Button Behavior
 btnGrid.addEventListener('mousedown', (e) => {
     if (e.target.getAttribute('id') == 'clear') {
+        decimalModifier = 1;
+
         if (operand2 !== null) {
             operand2 = null;
         } else if (operation !== null) {
@@ -62,12 +64,19 @@ btnGrid.addEventListener('click', (e) => {
 
         const numOfDigits = (numInput !== null) ? (numInput + '').replace(/[-.]/, '').length : 0;
         if (numOfDigits < 8) {
-            numInput = (numInput + '') + e.target.value;
+            if (decimalModifier < 1) {
+                numInput = numInput + (Number(e.target.value) * decimalModifier);
+                decimalModifier /= 10;
+            } else {
+                numInput = numInput * 10 + Number(e.target.value);
+            }
+
+            console.log(numInput);
             
             if (firstOp) {
-                operand1 = Number(numInput);
+                operand1 = numInput;
             } else {
-                operand2 = Number(numInput);
+                operand2 = numInput;
             }
         }
     }
@@ -76,7 +85,9 @@ btnGrid.addEventListener('click', (e) => {
 // dot/decimal point button behavior
 btnGrid.addEventListener('click', (e) => {
     if (e.target.getAttribute('id') == 'dot') {
-
+        if (Number.isInteger(operand2) || Number.isInteger(operand1)) {
+            decimalModifier = 0.1;
+        }
     }
 });
 
