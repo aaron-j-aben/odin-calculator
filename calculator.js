@@ -8,6 +8,7 @@ const MAX_DIGITS = 8;
 
 const btnGrid = document.querySelector('#btn-grid');
 const clearBtn = document.querySelector('#clear');
+const evalBtn = document.querySelector('#equals');
 
 let operand1, operand2, operation, shadowOperation;
 startCalc();
@@ -23,23 +24,21 @@ function startCalc() {
 
 // = button evaluation behavior
 // REMINDER TO DELETE - Evaluation results go to first number, op2 and operator not cleared until C pressed
-btnGrid.addEventListener('click', (e) => {
-    if (e.target.getAttribute('id') == 'equals') {
-        const nop1 = Number(operand1), nop2 = Number(operand2);
-        // Op2 and Oper must both be or neither be null to eval
-        if (operand2 !== null & operation !== null){
-            let top = nop2, toper = operation;
-            operand1 = operate(nop1, nop2, operation).toString();
-            shadowOperation = (x) => { // "Save" prior operation for repeat evaluations
-                return toper(x, top);
-            };
-            console.log(operand1); //temp display behavior
-        } else if (operand2 == null && operation == null){
-            if (shadowOperation !== null) {
-                operand1 = shadowOperation(nop1).toString();
-            }
-            console.log(operand1); //temp display behavior
+evalBtn.addEventListener('click', (e) => {
+    const nop1 = Number(operand1), nop2 = Number(operand2);
+    // Op2 and Oper must both be or neither be null to eval
+    if (operand2 !== null & operation !== null){
+        let top = nop2, toper = operation;
+        operand1 = operate(nop1, nop2, operation).toString();
+        shadowOperation = (x) => { // "Save" prior operation for repeat evaluations
+            return toper(x, top);
+        };
+        console.log(operand1); //temp display behavior
+    } else if (operand2 == null && operation == null){
+        if (shadowOperation !== null) {
+            operand1 = shadowOperation(nop1).toString();
         }
+        console.log(operand1); //temp display behavior
     }
 });
 
