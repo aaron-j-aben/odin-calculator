@@ -51,17 +51,18 @@ html {
     margin: 1%;
     border-radius: 10px;
     border: 1px;
-    box-shadow: black -2px 2px;
+    box-shadow: black -2px 3px 1px;
     transition: 0.1s ease-in-out;
 }
 
 #btn-grid button:active {
-    box-shadow: black -0.5px 0.5px;
+    box-shadow: black -0.75px 0.75px 0.5px inset;
 }
 
-#btn-grid button.row1:active, #btn-grid button.col4:active {
+/* #btn-grid button.row1:active, #btn-grid button.col4:active {
+    transition: 0s;
     background-color: red;
-}
+} */
 
 .row1 {
     color: azure;
