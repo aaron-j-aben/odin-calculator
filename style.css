@@ -70,6 +70,21 @@ html {
 
 #solar-panel {
     display: flex;
+    justify-items: space-around;
+    padding: 0.5px;
+    gap: 1%;
+    background-color: black;
+    box-shadow: 
+        black  -4px 4px 3px inset,
+        black  2px -2px 3px inset;
+
+    grid-row: 3 / 4;
+    grid-column: 1 / 2;
+}
+
+#solar-panel > .pane {
+    flex: 1 0 auto;
+    background-color: rgb(33, 49, 49);
 }
 
 @font-face {
