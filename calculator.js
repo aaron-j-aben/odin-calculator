@@ -101,6 +101,11 @@ function divide(dividend, divisor) {
     return dividend / divisor;
 }
 
+// Unary operations
 function negate(x, y) {
     return (-x);
+}
+
+function percent(x, y) {
+    return (x / 100);
 }
