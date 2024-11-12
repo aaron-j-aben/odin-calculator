@@ -10,6 +10,7 @@ const btnGrid = document.querySelector('#btn-grid');
 const clearBtn = document.querySelector('#clear');
 const evalBtn = document.querySelector('#equals');
 const disp = document.querySelector('#results-text');
+const dispParity = document.querySelector('#parity');
 
 const operationMapping = {
     'plus': add,
@@ -31,8 +32,12 @@ function startCalc() {
 
 /* DISPLAY BEHAVIOR */
 function updateDisplay(numStr) {
-    const maxPlaces = (Number.isInteger(numStr)) ? MAX_DIGITS : MAX_DIGITS + 1 ;
-    disp.textContent = numStr.slice(0, maxPlaces);
+    const num = Number(numStr)
+    let maxPlaces = (Number.isInteger(num)) ? MAX_DIGITS : MAX_DIGITS + 1;
+    const [startInd, parityStr] = (num >= 0) ? [0, ''] : (maxPlaces++, [1, '-']);
+
+    disp.textContent = numStr.slice(startInd, maxPlaces);
+    dispParity.textContent = parityStr;
 }
 
 /* BUTTON BEHAVIOR */
