@@ -2,6 +2,10 @@ html {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+body {
+    background-color: beige;
+}
+
 #centering {
     display: flex;
     height: 100vh;
