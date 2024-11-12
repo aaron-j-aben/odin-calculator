@@ -7,6 +7,7 @@
 const MAX_DIGITS = 8;
 
 const btnGrid = document.querySelector('#btn-grid');
+const clearBtn = document.querySelector('#clear');
 
 let operand1, operand2, operation, shadowOperation;
 startCalc();
@@ -43,16 +44,14 @@ btnGrid.addEventListener('click', (e) => {
 });
 
 // AC/Clear Button Behavior
-btnGrid.addEventListener('mousedown', (e) => {
-    if (e.target.getAttribute('id') == 'clear') {
-        if (operand2 !== null) {
-            operand2 = null;
-        } else if (operation !== null) {
-            operation = null;
-        } else {
-            shadowOperation = null;
-            operand1 = '0';
-        }
+clearBtn.addEventListener('mousedown', (e) => {
+    if (operand2 !== null) {
+        operand2 = null;
+    } else if (operation !== null) {
+        operation = null;
+    } else {
+        shadowOperation = null;
+        operand1 = '0';
     }
 });
 
