@@ -11,6 +11,13 @@ const clearBtn = document.querySelector('#clear');
 const evalBtn = document.querySelector('#equals');
 
 let operand1, operand2, operation, shadowOperation;
+const operationMapping = {
+    'plus': add,
+    'minus': subtract,
+    'times': multiply,
+    'divide': divide
+};
+
 startCalc();
 
 function startCalc() {
@@ -20,7 +27,7 @@ function startCalc() {
 
 /* Display behavior */
 
-/* Button behavior */
+/* BUTTON BEHAVIOR */
 
 // = button evaluation behavior
 // REMINDER TO DELETE - Evaluation results go to first number, op2 and operator not cleared until C pressed
@@ -39,6 +46,13 @@ evalBtn.addEventListener('click', (e) => {
             operand1 = shadowOperation(nop1).toString();
         }
         console.log(operand1); //temp display behavior
+    }
+});
+
+// Binary Operator Button Behavior
+btnGrid.addEventListener('mousedown', (e) => {
+    if (e.target.classList.contains('binary')) {
+        operation = operationMapping[e.target.getAttribute('id')];
     }
 });
 
@@ -90,6 +104,7 @@ function operate(op1, op2, operation) {
     return operation(op1, op2);
 }
 
+/* OPERATION EVALUATION */
 /* Basic Operations with any number type */
 function add(x, y) {
     return x + y;
