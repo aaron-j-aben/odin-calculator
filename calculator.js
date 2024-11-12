@@ -25,12 +25,11 @@ function startCalc() {
 btnGrid.addEventListener('click', (e) => {
     if (e.target.getAttribute('id') == 'equals') {
         // Op2 and Oper must both be or neither be null to eval
-        if (operand1 !== null) {
-            if (operand2 !== null & operation !== null){
-                console.log(operate(operand1, operand2, operation)); //temp display behavior
-            } else if (operand2 == null && operation == null){
-                console.log(operand1); //temp display behavior
-            }
+        if (operand2 !== null & operation !== null){
+            operand1 = operate(operand1, operand2, operation);
+            console.log(operand1); //temp display behavior
+        } else if (operand2 == null && operation == null){
+            console.log(operand1); //temp display behavior
         }
     }
 });
