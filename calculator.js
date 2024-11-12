@@ -65,17 +65,7 @@ btnGrid.addEventListener('click', (e) => {
     }
 });
 
-btnGrid.addEventListener('click', (e) => {
-    if (e.target.firstChild.nodeName == 'SPAN') {
-    }
-});
 
-/**
- * 
- * @param {number} op1 
- * @param {number} op2 
- * @param {object} operation
- */
 function operate(op1, op2, operation) {
     return operation(op1, op2);
 }
@@ -103,7 +93,7 @@ function divide(dividend, divisor) {
 
 // Unary operations
 function negate(x, y) {
-    return (-x);
+    return (y == null) ? (-x) : (-y);
 }
 
 function percent(x, y) {
