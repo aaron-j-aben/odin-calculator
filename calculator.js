@@ -37,10 +37,10 @@ btnGrid.addEventListener('click', (e) => {
 
 // AC/Clear Button Behavior
 btnGrid.addEventListener('click', (e) => {
-    if (e.target.getAttribute('clear')) {
+    if (e.target.getAttribute('id') == 'clear') {
         if (operand2 !== null) {
             operand2 = null;
-        } else if (operation != null) {
+        } else if (operation !== null) {
             operation = null;
         } else {
             operand1 = 0;
