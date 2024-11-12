@@ -50,6 +50,9 @@ html {
     align-self: stretch;
     margin: 1%;
     border-radius: 10px;
+    border: 1px;
+    box-shadow: black -3px 3px;
+    transition: 0.1s ease-in-out;
 }
 
 .row1 {
