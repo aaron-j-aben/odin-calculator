@@ -60,8 +60,13 @@ html {
     box-shadow: black -0.5px 0.5px;
 }
 
-.row1 {
+#btn-grid button.clicked.row1 {
     background-color: red;
+}
+
+.row1 {
+    color: azure;
+    background-color: darkred;
     grid-row-start: 1;
     grid-row-end: 2;
 }
