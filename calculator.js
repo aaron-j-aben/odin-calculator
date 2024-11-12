@@ -8,12 +8,12 @@ const MAX_DIGITS = 8;
 
 const btnGrid = document.querySelector('#btn-grid');
 
-let operand1, operand2, operation;
+let operand1, operand2, operation, shadowOperation;
 startCalc();
 
 function startCalc() {
     operand1 = 0, operand2 = null;
-    operation = null;
+    operation = null, shadowOperation = null;
 }
 
 /* Display behavior */
@@ -26,9 +26,16 @@ btnGrid.addEventListener('click', (e) => {
     if (e.target.getAttribute('id') == 'equals') {
         // Op2 and Oper must both be or neither be null to eval
         if (operand2 !== null & operation !== null){
+            let top = operand2, toper = operation;
             operand1 = operate(operand1, operand2, operation);
+            shadowOperation = (x) => { // "Save" prior operation for repeat evaluations
+                return toper(x, top);
+            };
             console.log(operand1); //temp display behavior
         } else if (operand2 == null && operation == null){
+            if (shadowOperation !== null) {
+                operand1 = shadowOperation(operand1);
+            }
             console.log(operand1); //temp display behavior
         }
     }
@@ -62,6 +69,13 @@ btnGrid.addEventListener('click', (e) => {
                 operand2 = Number(numInput);
             }
         }
+    }
+});
+
+// dot/decimal point button behavior
+btnGrid.addEventListener('click', (e) => {
+    if (e.target.getAttribute('id') == 'dot') {
+
     }
 });
 
