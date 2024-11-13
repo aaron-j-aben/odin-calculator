@@ -136,11 +136,6 @@ header h2 {
     background-color: rgb(33, 49, 49);
 }
 
-@font-face {
-    font-family: 'TI-Model';
-    src: url();
-}
-
 #model {
     font-family: 'Courier Prime', monospace;
     font-weight: 700;
@@ -171,6 +166,7 @@ header h2 {
 /* Button styles */
 
 #btn-grid button {
+    font-family: 'Courier Prime', Times, serif;
     justify-self: stretch;
     align-self: stretch;
     margin: 1%;
