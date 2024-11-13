@@ -140,7 +140,7 @@ body {
 }
 
 #btn-grid button:active {
-    box-shadow: black -0.75px 0.75px 0.5px inset;
+    box-shadow: black -1.5px 1.5px 0.5px inset;
 }
 
 button .btn-text {

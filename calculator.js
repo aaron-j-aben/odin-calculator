@@ -21,6 +21,8 @@ const operationMapping = {
     'percent': percent
 };
 
+const operNodes = document.querySelectorAll('.col4');
+
 let operand1, operand2, operation, shadowOperation;
 
 startCalc();
@@ -28,10 +30,15 @@ startCalc();
 function startCalc() {
     operand1 = '0', operand2 = null;
     operation = null, shadowOperation = null;
+    evalBtn.disabled = false;
 }
 
 /* DISPLAY BEHAVIOR */
 function updateDisplay(numStr) {
+    if (Number(numStr) == NaN) {
+        disp.textContent = numStr;
+    }
+
     const num = Number(numStr)
     let maxPlaces = (Number.isInteger(num)) ? MAX_DIGITS : MAX_DIGITS + 1;
     const [startInd, parityStr] = (num >= 0) ? [0, ''] : (maxPlaces++, [1, '-']);
@@ -80,6 +87,11 @@ clearBtn.addEventListener('mousedown', (e) => {
         shadowOperation = null;
         operand1 = '0';
     }
+
+    for (const operBtn of operNodes) {
+        operBtn.disabled = false;
+    }
+
     updateDisplay(operand1);
 });
 
@@ -120,6 +132,7 @@ btnGrid.addEventListener('click', (e) => {
 
 function evalEventHandler(e) {
     const nop1 = Number(operand1), nop2 = Number(operand2);
+
     // Op2 and Oper must both be or neither be null to eval
     if (operand2 !== null & operation !== null){
         let top = nop2, toper = operation;
@@ -137,7 +150,18 @@ function evalEventHandler(e) {
         }
         console.log(operand1); //temp display behavior
     }
-    updateDisplay(operand1);
+
+    const op1Digits = operand1.replace(/[-.]/, '').length;
+
+    if (op1Digits > 8) {
+        updateDisplay('E');
+
+        for (const operBtn of operNodes) {
+            operBtn.disabled = true;
+        }
+    } else {
+        updateDisplay(operand1);
+    }
 }
 
 function operate(op1, op2, operation) {
