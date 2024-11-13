@@ -58,6 +58,7 @@ evalBtn.addEventListener('click', evalEventHandler);
 btnGrid.addEventListener('mousedown', (e) => {
     if (e.target.classList.contains('unary')) {
         const unOp = operationMapping[e.target.getAttribute('id')];
+
         if (operand2 !== null) {
             operand2 = unOp(Number(operand2)).toString();
             updateDisplay(operand2);
@@ -65,6 +66,7 @@ btnGrid.addEventListener('mousedown', (e) => {
             operand1 = unOp(Number(operand1)).toString();
             updateDisplay(operand1);
         }
+
     }
 });
 
@@ -74,6 +76,7 @@ btnGrid.addEventListener('mousedown', (e) => {
         if (operand2 !== null) {
             evalEventHandler(e);
         }
+
         operation = operationMapping[e.target.getAttribute('id')];
     }
 });
@@ -104,8 +107,6 @@ btnGrid.addEventListener('click', (e) => {
         const numOfDigits = (numInput !== null) ? numInput.replace(/[-.]/, '').length : 0;
         if (numOfDigits < 8) {
             numInput = (numInput == '0' || numInput == null) ? e.target.value : numInput + e.target.value; 
-
-            console.log(numInput);
             
             if (firstOp) {
                 operand1 = numInput;
@@ -114,6 +115,7 @@ btnGrid.addEventListener('click', (e) => {
                 operand2 = numInput;
                 updateDisplay(operand2);
             }
+
         }
     }
 });
@@ -134,11 +136,14 @@ btnGrid.addEventListener('click', (e) => {
 function evalEventHandler(e) {
     const nop1 = Number(operand1), nop2 = Number(operand2);
 
-    // Op2 and Oper must both be or neither be null to eval
+    // Op2 and Oper must both be or neither be null to evaluate operation
     if (operand2 !== null & operation !== null){
         let top = nop2, toper = operation;
         const result = operate(nop1, nop2, operation);
         
+        // Handle erroneous output, e.g. divide by zero. Null return on divide by 
+        // zero rather than letting Infinity/NaN pass through so can possibly add
+        // more operations with possibly bad output
         if (result === null) {
             for (const operBtn of operNodes) {
                 operBtn.disabled = false;
@@ -154,17 +159,16 @@ function evalEventHandler(e) {
         shadowOperation = (x) => { // "Save" prior operation for repeat evaluations
             return toper(x, top);
         };
-        console.log(operand1); //temp display behavior
+
     } else if (operand2 == null && operation == null){
         if (shadowOperation !== null) {
             operand1 = shadowOperation(nop1).toString();
         }
-        console.log(operand1); //temp display behavior
     }
 
-    const op1Digits = operand1.replace(/[-.]/, '').length;
+    const resultDigits = operand1.replace(/[-.]/, '').length;
 
-    if (op1Digits > 8) {
+    if (resultDigits > 8) {
         updateDisplay('Err');
 
         for (const operBtn of operNodes) {
