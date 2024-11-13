@@ -137,7 +137,17 @@ function evalEventHandler(e) {
     // Op2 and Oper must both be or neither be null to eval
     if (operand2 !== null & operation !== null){
         let top = nop2, toper = operation;
-        operand1 = operate(nop1, nop2, operation).toString();
+        const result = operate(nop1, nop2, operation);
+        
+        if (result === null) {
+            for (const operBtn of operNodes) {
+                operBtn.disabled = false;
+            }
+            updateDisplay('Err');
+            return;
+        }
+        
+        operand1 = result.toString();
         operand2 = null;
         operation = null;
 
