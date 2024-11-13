@@ -35,8 +35,9 @@ function startCalc() {
 
 /* DISPLAY BEHAVIOR */
 function updateDisplay(numStr) {
-    if (Number(numStr) == NaN) {
+    if (isNaN(Number(isNaN))) {
         disp.textContent = numStr;
+        return;
     }
 
     const num = Number(numStr)
@@ -154,7 +155,7 @@ function evalEventHandler(e) {
     const op1Digits = operand1.replace(/[-.]/, '').length;
 
     if (op1Digits > 8) {
-        updateDisplay('E');
+        updateDisplay('Err');
 
         for (const operBtn of operNodes) {
             operBtn.disabled = true;
