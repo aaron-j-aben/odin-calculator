@@ -19,13 +19,26 @@ header {
     justify-content: end;
     align-items: center;
     padding: 1%;
+    min-width: 55%;
 
     flex: 1 0 auto;
 }
 
+/* Type Out Heading Info */
 header h1 {
     font-size: 3em;
     margin: 5px;
+    letter-spacing: .08em;
+    overflow: hidden;
+    white-space: nowrap;
+    animation: 
+        typing 1.5s steps(40, end)
+}
+
+
+@keyframes typing {
+    from { width: 0em }
+    to { width: 10em }
 }
 
 header h2 {

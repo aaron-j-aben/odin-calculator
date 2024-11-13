@@ -11,6 +11,7 @@ const clearBtn = document.querySelector('#clear');
 const evalBtn = document.querySelector('#equals');
 const disp = document.querySelector('#results-text');
 const dispParity = document.querySelector('#parity');
+const headDisp = document.querySelector('header h1');
 
 const operationMapping = {
     'plus': add,
