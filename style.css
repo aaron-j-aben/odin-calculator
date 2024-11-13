@@ -1,5 +1,5 @@
 html {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: 'Courier Prime', serif;
 }
 
 body {
@@ -7,14 +7,42 @@ body {
 }
 
 #centering {
-    display: flex;
     height: 100vh;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
 
+header {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    padding: 1%;
+
+    flex: 1 0 auto;
+}
+
+header h1 {
+    font-size: 3em;
+    margin: 5px;
+}
+
+header h2 {
+    font-size: 1em;
+    margin: 5px;
+}
+
+#calc-container {
+    display: flex;
+    justify-content: start;
+    flex: 1 0 auto;
+}
+
 #calculator {
     flex: 0 0 auto;
+    max-width: 400px;
+    max-height: 455px;
     background-color: rgb(0, 0, 180);
     box-shadow: rgb(0, 0, 87) -5px 0px;
     display: grid;
