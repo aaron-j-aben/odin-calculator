@@ -63,6 +63,8 @@ btnGrid.addEventListener('mousedown', (e) => {
         unOpBtn = e.target;
     } else if (e.target.matches('.unary > span')) {
         unOpBtn = e.target.parentNode;
+    } else {
+        return;
     }
 
     const unOp = operationMapping[unOpBtn.getAttribute('id')];
@@ -152,6 +154,8 @@ btnGrid.addEventListener('click', (e) => {
         dotBtn = e.target;
     } else if (e.target.matches('#dot > span')) {
         dotBtn = e.target.parentNode;
+    } else {
+        return;
     }
 
 
