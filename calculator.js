@@ -57,7 +57,7 @@ evalBtn.addEventListener('click', evalEventHandler);
 
 // Unary Operator Behavior
 btnGrid.addEventListener('mousedown', (e) => {
-    if (e.target.classList.contains('unary')) {
+    if (e.target.classList.contains('unary') || e.target.matches('.unary > span')) {
         const unOp = operationMapping[e.target.getAttribute('id')];
 
         if (operand2 !== null) {
@@ -73,13 +73,21 @@ btnGrid.addEventListener('mousedown', (e) => {
 
 // Binary Operator Button Behavior
 btnGrid.addEventListener('mousedown', (e) => {
-    if (e.target.classList.contains('binary')) {
-        if (operand2 !== null) {
-            evalEventHandler(e);
-        }
+    let opBtn;
 
-        operation = operationMapping[e.target.getAttribute('id')];
+    if (e.target.classList.contains('binary')) {
+        opBtn = e.target;
+    } else if (e.target.matches('.binary > span')) {
+        opBtn = e.target.parentNode;
+    } else {
+        return;
     }
+
+    if (operand2 !== null) {
+        evalEventHandler(e);
+    }
+
+    operation = operationMapping[e.target.getAttribute('id')];
 });
 
 // AC/Clear Button Behavior
@@ -96,34 +104,42 @@ clearBtn.addEventListener('mousedown', (e) => {
     for (const operBtn of operNodes) {
         operBtn.disabled = false;
     }
+    evalBtn.disabled = false;
 
     updateDisplay(operand1);
 });
 
 // num button behavior
 btnGrid.addEventListener('click', (e) => {
+    let numBtn;
     if (e.target.classList.contains('num')) {
-        let [numInput, firstOp] = (operation !== null) ? [operand2, false] : [operand1, true];
+        numBtn = e.target;
+    } else if (e.target.matches('.num > span')) {
+        numBtn = e.target.parentNode
+    } else {
+        return;
+    }
 
-        const numOfDigits = (numInput !== null) ? numInput.replace(/[-.]/, '').length : 0;
-        if (numOfDigits < 8) {
-            numInput = (numInput == '0' || numInput == null) ? e.target.value : numInput + e.target.value; 
-            
-            if (firstOp) {
-                operand1 = numInput;
-                updateDisplay(operand1);
-            } else {
-                operand2 = numInput;
-                updateDisplay(operand2);
-            }
+    let [numInput, firstOp] = (operation !== null) ? [operand2, false] : [operand1, true];
 
+    const numOfDigits = (numInput !== null) ? numInput.replace(/[-.]/, '').length : 0;
+    if (numOfDigits < 8) {
+        numInput = (numInput == '0' || numInput == null) ? numBtn.value : numInput + numBtn.value; 
+        
+        if (firstOp) {
+            operand1 = numInput;
+            updateDisplay(operand1);
+        } else {
+            operand2 = numInput;
+            updateDisplay(operand2);
         }
+
     }
 });
 
 // dot/decimal point button behavior
 btnGrid.addEventListener('click', (e) => {
-    if (e.target.getAttribute('id') == 'dot') {
+    if (e.target.getAttribute('id') == 'dot' || e.target.matches('#dot > span')) {
         if (operand2 !== null && !operand2.includes('.')){
             operand2 += '.';
             updateDisplay(operand2);
@@ -142,20 +158,23 @@ function evalEventHandler(e) {
         let top = nop2, toper = operation;
         const result = operate(nop1, nop2, operation);
         
+        operand2 = null;
+        operation = null;
         // Handle erroneous output, e.g. divide by zero. Null return on divide by 
         // zero rather than letting Infinity/NaN pass through so can possibly add
         // more operations with possibly bad output
         if (result === null) {
             for (const operBtn of operNodes) {
-                operBtn.disabled = false;
+                operBtn.disabled = true;;
             }
+            evalBtn.disabled = true;
+
+            operand1 = '0';
             updateDisplay('Err');
             return;
         }
         
         operand1 = result.toString();
-        operand2 = null;
-        operation = null;
 
         shadowOperation = (x) => { // "Save" prior operation for repeat evaluations
             return toper(x, top);
