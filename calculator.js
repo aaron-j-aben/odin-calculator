@@ -183,19 +183,33 @@ function evalEventHandler(e) {
     } else if (operand2 == null && operation == null){
         if (shadowOperation !== null) {
             operand1 = shadowOperation(nop1).toString();
+        } else {
+            operand1 = nop1.toString();
         }
     }
 
-    const resultDigits = operand1.replace(/[-.]/, '').length;
+    const resultParts = (/-?(\d+)\.?(\d*)/).exec(operand1);
+    const wholeDigits = resultParts[1];
+    const decimalDigits = resultParts[2];
 
-    if (resultDigits > 8) {
+
+    if (wholeDigits.length > MAX_DIGITS) {
         updateDisplay('Err');
 
         for (const operBtn of operNodes) {
             operBtn.disabled = true;
-        }
+        } 
+        evalBtn.disabled = true;
+
     } else {
-        updateDisplay(operand1);
+        const totalDigits = wholeDigits.length + decimalDigits.length;
+
+        if (totalDigits > MAX_DIGITS) {
+            updateDisplay(Number(operand1).toFixed(MAX_DIGITS - wholeDigits));
+        } else {
+           updateDisplay(operand1);
+        }
+
     }
 }
 
