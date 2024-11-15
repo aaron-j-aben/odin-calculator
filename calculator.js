@@ -57,18 +57,24 @@ evalBtn.addEventListener('click', evalEventHandler);
 
 // Unary Operator Behavior
 btnGrid.addEventListener('mousedown', (e) => {
-    if (e.target.classList.contains('unary') || e.target.matches('.unary > span')) {
-        const unOp = operationMapping[e.target.getAttribute('id')];
+    let unOpBtn;
 
-        if (operand2 !== null) {
-            operand2 = unOp(Number(operand2)).toString();
-            updateDisplay(operand2);
-        } else if (operand1 != 0) {
-            operand1 = unOp(Number(operand1)).toString();
-            updateDisplay(operand1);
-        }
-
+    if (e.target.classList.contains('unary')) {
+        unOpBtn = e.target;
+    } else if (e.target.matches('.unary > span')) {
+        unOpBtn = e.target.parentNode;
     }
+
+    const unOp = operationMapping[unOpBtn.getAttribute('id')];
+
+    if (operand2 !== null) {
+        operand2 = unOp(Number(operand2)).toString();
+        updateDisplay(operand2);
+    } else if (operand1 != 0) {
+        operand1 = unOp(Number(operand1)).toString();
+        updateDisplay(operand1);
+    }
+
 });
 
 // Binary Operator Button Behavior
@@ -87,7 +93,7 @@ btnGrid.addEventListener('mousedown', (e) => {
         evalEventHandler(e);
     }
 
-    operation = operationMapping[e.target.getAttribute('id')];
+    operation = operationMapping[opBtn.getAttribute('id')];
 });
 
 // AC/Clear Button Behavior
@@ -112,6 +118,7 @@ clearBtn.addEventListener('mousedown', (e) => {
 // num button behavior
 btnGrid.addEventListener('click', (e) => {
     let numBtn;
+
     if (e.target.classList.contains('num')) {
         numBtn = e.target;
     } else if (e.target.matches('.num > span')) {
@@ -139,14 +146,21 @@ btnGrid.addEventListener('click', (e) => {
 
 // dot/decimal point button behavior
 btnGrid.addEventListener('click', (e) => {
-    if (e.target.getAttribute('id') == 'dot' || e.target.matches('#dot > span')) {
-        if (operand2 !== null && !operand2.includes('.')){
-            operand2 += '.';
-            updateDisplay(operand2);
-        } else if (!operand1.includes('.')) {
-            operand1 += '.';
-            updateDisplay(operand1);
-        }
+    let dotBtn;
+
+    if (e.target.getAttribute('id') == 'dot') {
+        dotBtn = e.target;
+    } else if (e.target.matches('#dot > span')) {
+        dotBtn = e.target.parentNode;
+    }
+
+
+    if (operand2 !== null && !operand2.includes('.')){
+        operand2 += '.';
+        updateDisplay(operand2);
+    } else if (!operand1.includes('.')) {
+        operand1 += '.';
+        updateDisplay(operand1);
     }
 });
 
